@@ -8,6 +8,11 @@ Not recommanded for web usage right now.
 Optimized for mobile frameworks like CapacitorJS and NativeScript.
 :::
 
+## Installation
+
+Copy paste components from [github repo](https://github.com/fontanaen/shadcn-mobile) on your project.
+It's cheap for now but I'm working on a better solution. (waiting for shadcn-vue registry)
+
 ## Routing
 Modal is coupled with vue-router. It use nested navigation to show the modal and stack.
 
