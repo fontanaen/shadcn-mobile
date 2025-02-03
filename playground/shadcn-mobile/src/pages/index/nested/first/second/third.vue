@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Modal, ModalClose, ModalContent, ModalDescription, ModalHeader, ModalOverlay, ModalTitle, ModalToolbar } from '@/packages/core/src/components/modal'
+import { Modal, ModalClose, ModalContent, ModalDescription, ModalHeader, ModalOverlay, ModalTitle, ModalToolbar } from '@/components/ui/modal'
 import Page from '@/components/ui/page/Page.vue'
 import { X } from 'lucide-vue-next';
 import { ref } from 'vue'

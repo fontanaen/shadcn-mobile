@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Modal, ModalContent, ModalOverlay } from '@/packages/core/src/components/modal'
+import { Modal, ModalContent, ModalOverlay } from '@/components/ui/modal'
 import Page from '@/components/ui/page/Page.vue'
 import { ChevronLeft } from 'lucide-vue-next'
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ModalStackProvider } from '@/packages/core/src/components/modal'
+import { ModalStackProvider } from '@/components/ui/modal'
 </script>
 
 <template>

@@ -42,6 +42,7 @@ On dismissing a modal, the `router.back()` will be called after **the modal dimi
 
 | Component | Description |
 | ---- | ---- |
+| `ModalStackProvider` | Provide a modal stack context to the app |
 | `Modal` | The modal root component |
 | `ModalContent` | The content of the modal |
 | `ModalToolbar` | The toolbar of the modal |
@@ -51,6 +52,28 @@ On dismissing a modal, the `router.back()` will be called after **the modal dimi
 | `ModalClose` | The close button of the modal |
 | `ModalOverlay` | The overlay of the modal |
 | `ModalTrigger` | Button to open a modal |
+
+## Setup 
+
+You must wrap your app with `ModalStackProvider` to use the modal component.
+Prevent the page from overscrolling when a modal is open.
+
+```vue [app.vue]
+<script setup lang="ts">
+import { ModalStackProvider } from '@/packages/core/src/components/modal'
+</script>
+
+<template>
+  <ModalStackProvider v-slot="{ context }">
+    <div 
+      class="min-h-screen bg-background text-foreground antialiased bg-black"
+      :class="{'overscroll-none overflow-hidden': context.isModalOpen}"
+    >
+      <RouterView />
+    </div>
+  </ModalStackProvider>
+</template>
+```
 
 ## Basic Usage
 

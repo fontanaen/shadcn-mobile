@@ -11,7 +11,7 @@ const router = createRouter({
 
 if (import.meta.hot) { 
     handleHotUpdate(router) 
-} 
+}
 
 createApp(App)
   .use(router)

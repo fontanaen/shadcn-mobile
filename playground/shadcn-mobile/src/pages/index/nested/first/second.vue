@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Modal, ModalClose, ModalContent, ModalDescription, ModalHeader, ModalOverlay, ModalTitle, ModalToolbar } from '@/packages/core/src/components/modal'
-import { ModalTrigger } from '@/packages/core/src/components/modal'
+import { Modal, ModalClose, ModalContent, ModalDescription, ModalHeader, ModalOverlay, ModalTitle, ModalToolbar } from '@/components/ui/modal'
+import { ModalTrigger } from '@/components/ui/modal'
 import { X } from 'lucide-vue-next'
 import { ref } from 'vue'
 
@@ -8,12 +8,10 @@ const open = ref(true)
 const canSwipeToDismiss = ref(false)
 
 function onWillDismiss() {
-  console.log('onWillDismiss')
-  return false
+  return true
 }
 
 function onTryDismissOnSwipeDisabled() {
-  console.log('onTryDismissOnSwipeDisabled')
   return false
 }
 </script>

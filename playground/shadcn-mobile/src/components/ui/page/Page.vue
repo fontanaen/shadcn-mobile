@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useModalStack } from '@/packages/core/src/components/modal';
+import { useModalStack } from '@/components/ui/modal';
 
 interface Props {
   title?: string

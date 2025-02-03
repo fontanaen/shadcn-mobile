@@ -22,6 +22,7 @@ const currentY = ref(0)
 const modalHeight = ref(0)
 const transitionY = ref(0)
 const isScrolling = ref(false)
+const isAtTopValue = ref(true)
 const scrollableElements = ref<HTMLElement[]>([])
 
 let scrollTimeout: number | null = null
@@ -53,6 +54,7 @@ function handleScroll(e: Event) {
   
   target.style.overscrollBehavior = "auto"
 
+
   if (scrollTimeout) {
     window.clearTimeout(scrollTimeout)
   }
@@ -73,8 +75,9 @@ function isAtTop() {
   if (!contentRef.value) return true
   
   scrollableElements.value = findScrollableElements(contentRef.value)
+  isAtTopValue.value = !scrollableElements.value.some(element => element.scrollTop > 0)
   
-  return !scrollableElements.value.some(element => element.scrollTop > 0)
+  return isAtTopValue.value
 }
 
 function applyResistance(delta: number): number {
@@ -260,6 +263,12 @@ onMounted(() => {
     })
   }
 })
+
+const contentClasses = computed(() => cn(
+  'min-h-0 flex-1 overflow-y-auto',
+  (isDragging.value || isAtTopValue.value) && 'overscroll-none',
+  props.class
+))
 </script>
 
 <template>
@@ -289,11 +298,7 @@ onMounted(() => {
 
       <div
         ref="contentRef"
-        :class="cn(
-          'min-h-0 flex-1 overflow-y-auto overscroll-none',
-          isDragging && 'overflow-hidden',
-          props.class
-        )"
+        :class="contentClasses"
         @scroll.capture="handleScroll"
       >
         <slot />

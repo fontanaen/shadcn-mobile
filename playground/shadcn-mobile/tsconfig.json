@@ -27,7 +27,10 @@
     "paths": {
       "@/*": ["src/*"],
       "@/packages/*": ["../../packages/*"]
-    }
+    },
+    "types": [
+      "unplugin-vue-router/client"
+    ]
   },
   "include": [
     "src/**/*.ts",
@@ -35,6 +38,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "../../packages/**/*.ts",
-    "../../packages/**/*.vue"
+    "../../packages/**/*.vue",
+    "./typed-router.d.ts"
   ]
 }

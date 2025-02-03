@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Page from '@/components/ui/page/Page.vue'
-import { ModalTrigger } from '@/packages/core/src/components/modal'
+import { ModalTrigger } from '@/components/ui/modal'
 </script>
 
 <template>
