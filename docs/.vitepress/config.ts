@@ -6,7 +6,9 @@ export default defineConfig({
   description: "Beautiful and accessible IOS-like modal components for Vue 3",
 
   head: [
-    ['link', { rel: 'icon', href: '/logo.ico' }]
+    ['link', { rel: 'icon', href: '/logo.ico' }],
+    ["script", {}, 'window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };'],
+    ["script", { src: "/_vercel/insights/script.js", defer: '' }],
   ],
 
   themeConfig: {

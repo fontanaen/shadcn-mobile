@@ -1,7 +1,22 @@
 {
-  "name": "shadcn-mobile-docs",
+  "name": "shadcn-mobile",
   "private": true,
+  "version": "0.1.0",
   "type": "module",
+  "description": "A Vue 3 mobile navigation system with modal stack management, built with Shadcn UI and Tailwind CSS",
+  "keywords": [
+    "vue3",
+    "typescript",
+    "tailwindcss",
+    "shadcn-ui",
+    "mobile-navigation",
+    "modal-stack",
+    "vue-router",
+    "mobile-first",
+    "ui-components"
+  ],
+  "author": "",
+  "license": "MIT",
   "scripts": {
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
