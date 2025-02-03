@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /components/modal
+      link: /introduction
     - theme: alt
       text: View on GitHub
       link: https://github.com/fontanaen/shadcn-mobile

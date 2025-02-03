@@ -49,7 +49,28 @@ On dismissing a modal, the `router.back()` will be called after **the modal dimi
 
 ## Basic Usage
 
-```vue
+::: code-group
+
+```vue [index.vue (root page)]
+<script setup lang="ts">
+import { ref } from 'vue'
+import { ModalTrigger} from '@/components/ui'
+</script>
+
+<template>
+  <div>
+    <h1>Root Page</h1>
+
+    <ModalTrigger to="/nested">
+      <button>Open Modal</button>
+    </ModalTrigger>
+  </div>
+
+  <RouterView />
+</template>
+```
+
+```vue [nested.vue (nested modal page)]
 <script setup lang="ts">
 import { ref } from 'vue'
 import {
@@ -93,6 +114,15 @@ const open = ref(false)
 </template>
 ```
 
+``` text [router structure]
+src/pages/
+├── index.vue - root page
+└── index/
+    └── nested.vue - user modal page
+```
+
+:::
+
 ## Page transition with navigation
 
 ```vue
@@ -128,7 +158,6 @@ const open = ref(false)
 </template>
 ```
 
-
 ## Props
 
 ### Modal
@@ -139,6 +168,12 @@ const open = ref(false)
 | `canSwipeToDismiss` | `boolean` | `true` | Whether the modal can be closed by swiping |
 | `inline` | `boolean` | `false` | Whether the modal is inline |
 
+### ModalTrigger
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `to` | `string` | `undefined` | The route to navigate to when the modal is opened |
+
 ## Emits
 
 ### Modal
@@ -146,7 +181,6 @@ const open = ref(false)
 | Emits | Type | Description |
 | ---- | ---- | ----------- |
 | `update:open` | `boolean` | Whether the modal is open or not |
-| `willPresent` | `() => void` | Called when the modal is about to be presented |
 | `willDismiss` | `() => boolean` | Called when the modal is about to be dismissed. Return `true` to dismiss the modal, `false` to ignore the action. |
 | `tryDimissOnSwipeDisabled` | `() => boolean` | Called when the modal can't be dismissed by swiping but user tries to dismiss it. Return `true` to dismiss the modal, `false` to ignore the action. |
 
