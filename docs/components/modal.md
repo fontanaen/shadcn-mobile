@@ -1,0 +1,159 @@
+# Modal component
+
+An IOS-like modal/drawer/sheet page component.
+
+::: warning
+Not recommanded for web usage right now.
+
+Optimized for mobile frameworks like CapacitorJS and NativeScript.
+:::
+
+## Routing
+Modal is coupled with vue-router. It use nested navigation to show the modal and stack.
+
+If you want to use modal without vue-router, I recommand using `Drawer` component from shadcn/ui.
+
+::: tip
+For optimal routing experience with modals, I recommend using [unplugin-vue-router](https://github.com/posva/unplugin-vue-router). This plugin provides type-safe routing and better integration with Vue Router, which is essential for handling nested modal navigation and back/forward navigation properly.
+:::
+
+``` text
+src/pages/
+├── index.vue - root page
+├── about.vue
+└── index/users/[id]
+    ├── index.vue - user modal page
+    └── profile
+        ├── index.vue - profile modal page (nested modal)
+        └── settings
+            ├── index.vue - settings modal page (nested modal)
+```
+
+You must have a `<RouterView />` inside your modal page to show a nested modal page.
+
+On dismissing a modal, the `router.back()` will be called after **the modal dimiss animation is complete**.
+
+## Components
+
+| Component | Description |
+| ---- | ---- |
+| `Modal` | The modal root component |
+| `ModalContent` | The content of the modal |
+| `ModalToolbar` | The toolbar of the modal |
+| `ModalHeader` | The header of the modal |
+| `ModalTitle` | The title of the modal |
+| `ModalDescription` | The description of the modal |
+| `ModalClose` | The close button of the modal |
+| `ModalOverlay` | The overlay of the modal |
+| `ModalTrigger` | Button to open a modal |
+
+## Basic Usage
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalTitle,
+  ModalDescription,
+  ModalClose,
+  ModalBody,
+  ModalFooter,
+  ModalOverlay
+} from '@/components/ui'
+
+const open = ref(false)
+</script>
+
+<template>
+  <Modal v-model:open="open">
+    <ModalOverlay />
+    <ModalContent>
+      <ModalHeader>
+        <ModalTitle>Profile</ModalTitle>
+        <ModalDescription>
+          This is a profile modal.
+        </ModalDescription>
+      </ModalHeader>
+      <ModalBody>
+        <p>This is the body of the modal.</p>
+      </ModalBody>
+      <ModalFooter>
+        <ModalClose>
+          <Button>Close</Button>
+        </ModalClose>
+      </ModalFooter>
+    </ModalContent>
+  </Modal>
+
+  <!-- For nested navigation -->
+  <RouterView />
+</template>
+```
+
+## Page transition with navigation
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalTitle,
+  ModalDescription,
+  ModalClose,
+  ModalBody,
+  ModalFooter,
+  ModalOverlay
+} from '@/components/ui'
+
+const open = ref(false)
+</script>
+
+<template>
+  <Modal v-model:open="open">
+    <ModalOverlay />
+    <ModalContent>
+        <RouterView v-slot="{ Component }">
+            <Transition name="...">
+                <Component :is="Component" />
+            </Transition>
+        </RouterView>
+    </ModalContent>
+  </Modal>
+
+</template>
+```
+
+
+## Props
+
+### Modal
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `open` | `boolean` | `true` | Whether the modal is open or not |
+| `canSwipeToDismiss` | `boolean` | `true` | Whether the modal can be closed by swiping |
+| `inline` | `boolean` | `false` | Whether the modal is inline |
+
+## Emits
+
+### Modal
+
+| Emits | Type | Description |
+| ---- | ---- | ----------- |
+| `update:open` | `boolean` | Whether the modal is open or not |
+| `willPresent` | `() => void` | Called when the modal is about to be presented |
+| `willDismiss` | `() => boolean` | Called when the modal is about to be dismissed. Return `true` to dismiss the modal, `false` to ignore the action. |
+| `tryDimissOnSwipeDisabled` | `() => boolean` | Called when the modal can't be dismissed by swiping but user tries to dismiss it. Return `true` to dismiss the modal, `false` to ignore the action. |
+
+## Features
+
+- 🎨 Clean and modern UI design
+- 📱 Safe area inset
+- 🔄 Integration with router navigation
+- 🎯 Accessible components
+- 🎨 Consistent styling with Shadcn UI

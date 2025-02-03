@@ -1,0 +1,5 @@
+export const SWIPE_THRESHOLD = 0.5
+export const SWIPE_RESISTANCE_FACTOR = 0.2
+export const SWIPE_DISABLED_THRESHOLD = 0.125
+export const OPEN_DURATION = 250
+export const CLOSE_DURATION = 200
