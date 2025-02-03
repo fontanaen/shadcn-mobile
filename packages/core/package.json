@@ -1,0 +1,17 @@
+{
+  "name": "core",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@vueuse/core": "^12.5.0",
+    "radix-vue": "^1.9.13",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  }
+}
