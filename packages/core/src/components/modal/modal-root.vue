@@ -7,6 +7,7 @@ const props = withDefaults(defineProps<{
   open?: boolean
   inline?: boolean
   canSwipeToDismiss?: boolean
+  onDismiss?: () => void
   onWillDismiss?: () => boolean | Promise<boolean>
   onTryDismissOnSwipeDisabled?: () => boolean | Promise<boolean>
 }>(), {
@@ -26,6 +27,7 @@ const context = createModalContext({
   inline: toRef(props, 'inline'),
   canSwipeToDismiss: toRef(props, 'canSwipeToDismiss'),
   path: route.path,
+  onDismiss: props.onDismiss,
   onWillDismiss: props.onWillDismiss,
   onTryDismissOnSwipeDisabled: props.onTryDismissOnSwipeDisabled,
 })

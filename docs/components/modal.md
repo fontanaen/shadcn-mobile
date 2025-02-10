@@ -182,7 +182,6 @@ const open = ref(false)
         </RouterView>
     </ModalContent>
   </Modal>
-
 </template>
 ```
 
@@ -193,14 +192,18 @@ const open = ref(false)
 | Prop | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
 | `open` | `boolean` | `true` | Whether the modal is open or not |
-| `canSwipeToDismiss` | `boolean` | `true` | Whether the modal can be closed by swiping |
+| `canSwipeToDismiss` | `boolean` | `true` | Controls whether the modal can be dismissed via swipe gesture. When enabled, swiping down dismisses the modal. When disabled, swipe attempts are met with haptic resistance feedback and the modal remains open. |
 | `inline` | `boolean` | `false` | Whether the modal is inline |
+| `onDismiss` | `() => void` | `undefined` | Called when the modal is about to be dismissed. You can use it to replace default dismiss action. By default, `router.back()` is called. |
+| `willDismiss` | `() => boolean` | `() => true` | Called when the modal is about to be dismissed. Return `true` to dismiss the modal, `false` to ignore the action. |
+| `tryDismissOnSwipeDisabled` | `() => boolean` | `() => false` | Called when the modal can't be dismissed by swiping but user tries to dismiss it. Return `true` to dismiss the modal, `false` to ignore the action. |
 
 ### ModalTrigger
 
 | Prop | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
 | `to` | `string` | `undefined` | The route to navigate to when the modal is opened |
+| `replace` | `string` | `undefined` | The route to replace when the modal is opened |
 
 ## Emits
 
@@ -209,8 +212,6 @@ const open = ref(false)
 | Emits | Type | Description |
 | ---- | ---- | ----------- |
 | `update:open` | `boolean` | Whether the modal is open or not |
-| `willDismiss` | `() => boolean` | Called when the modal is about to be dismissed. Return `true` to dismiss the modal, `false` to ignore the action. |
-| `tryDimissOnSwipeDisabled` | `() => boolean` | Called when the modal can't be dismissed by swiping but user tries to dismiss it. Return `true` to dismiss the modal, `false` to ignore the action. |
 
 ## Features
 

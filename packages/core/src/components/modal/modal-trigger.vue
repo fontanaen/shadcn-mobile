@@ -1,19 +1,24 @@
 <script setup lang="ts">
-import { useModalStack } from './modal-stack-provider.vue';
+import { Primitive, type PrimitiveProps } from "radix-vue";
+import { useModalStack } from "./modal-stack-provider.vue";
 
-const props = defineProps<{
-  to: string
-}>()
+const props = withDefaults(defineProps<PrimitiveProps & ({ to: string } | { replace: string })>(), {
+  as: "div",
+});
 
-const { openModal } = useModalStack()
+const { openModal } = useModalStack();
 
 function handleClick() {
-  openModal(props.to, props.to)
+  if ("to" in props) {
+    openModal({ to: props.to });
+  } else {
+    openModal({ replace: props.replace });
+  }
 }
 </script>
 
 <template>
-  <div @click="handleClick">
+  <Primitive v-bind="props" @click="handleClick">
     <slot />
-  </div>
+  </Primitive>
 </template> 

@@ -1,6 +1,6 @@
 # Introduction
 
-Shadcn Mobile currently provides a powerful modal navigation component for Vue, built with the same design philosophy as Shadcn UI. This component reimagines the mobile modal pattern with a modern, customizable approach that Shadcn UI is known for.
+This project currently provides a powerful modal navigation component for Vue, built with the same design philosophy as Shadcn UI. This component reimagines the mobile modal pattern with a modern, customizable approach that Shadcn UI is known for.
 
 ## Why This Project?
 

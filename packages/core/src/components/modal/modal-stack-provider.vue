@@ -3,10 +3,10 @@ interface ModalStackProvider {
   stack: Ref<Map<string, ModalState>>
   currentModal: Ref<ModalState | undefined>
   isModalOpen: Ref<boolean>
-  openModal: (id: string, path: string) => void
+  openModal: (options: { to: string } | { replace: string }) => void
   dismissCurrentModal: () => void
-  onDismissRequested: EventHookOn<{id: string}>
-  triggerDismissExecuted: EventHookTrigger<{id: string}>
+  onDismissRequested: EventHookOn<{ id: string }>
+  triggerDismissExecuted: EventHookTrigger<{ id: string, callback?: () => void }>
 }
 
 export interface ModalState {
@@ -27,16 +27,21 @@ const ModalStackProviderKey: InjectionKey<ModalStackProvider> = Symbol('ModalSta
 export function createModalStackContext() {
   const router = useRouter()
 
-  const onDismissRequestedHook = createEventHook<{id: string}>()
-  const onDismissExecutedHook = createEventHook<{id: string}>()
+  const onDismissRequestedHook = createEventHook<{ id: string }>()
+  const onDismissExecutedHook = createEventHook<{ id: string, callback?: () => void }>()
 
   const currentModal = computed(() => modalStack.value.get(Array.from(modalStack.value.keys())[modalStack.value.size - 1]) as ModalState | undefined)
   const isModalOpen = computed(() => modalStack.value.size > 0)
 
-  onDismissExecutedHook.on(({id}) => {
-    modalStack.value.delete(id)
-    router.back()
-  })
+  onDismissExecutedHook.on(({ id, callback }) => {
+    modalStack.value.delete(id);
+
+    if (typeof callback === "function") {
+      callback();
+    } else {
+      router.back();
+    }
+  });
 
   function dismissCurrentModal() {
     if (currentModal.value) {
@@ -44,8 +49,12 @@ export function createModalStackContext() {
     }
   }
 
-  function openModal(path: string) {
-    router.push(path)
+  function openModal(options: { to: string } | { replace: string }) {
+    if ("to" in options) {
+      router.push(options.to);
+    } else if ("replace" in options) {
+      router.replace(options.replace);
+    }
   }
 
   provide(ModalStackProviderKey, {

@@ -7,6 +7,7 @@ export interface ModalContextProps {
   inline: Ref<boolean>
   canSwipeToDismiss: Ref<boolean>
   path: string,
+  onDismiss?: () => void
   onWillDismiss: () => boolean | Promise<boolean>
   onTryDismissOnSwipeDisabled: () => boolean | Promise<boolean>
 }
@@ -43,6 +44,7 @@ export function createModalContext(options: ModalContextProps) {
     open, 
     inline, 
     canSwipeToDismiss, 
+    onDismiss,
     onWillDismiss, 
     onTryDismissOnSwipeDisabled 
   } = options
@@ -98,7 +100,7 @@ export function createModalContext(options: ModalContextProps) {
     },
     dismiss: () => {
       modalState.value.isClosing = true
-      triggerDismissExecuted({ id })
+      triggerDismissExecuted({ id, callback: onDismiss })
     },
     onWillDismiss: async () => {
       return await onWillDismiss?.() ?? false
